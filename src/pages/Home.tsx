@@ -11,10 +11,12 @@ import {
 } from "@ionic/react";
 import React, { Component } from "react";
 import { Plugins, CameraResultType } from "@capacitor/core";
-const { Camera } = Plugins;
+import { Camera, CameraOptions } from '@ionic-enterprise/camera/lib';
+// const { Camera } = Plugins;
 const INITIAL_STATE = {
   photo: ""
 };
+
 export class Home extends Component {
   state: any = {};
   props: any = {};
@@ -23,18 +25,41 @@ export class Home extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
+  // async takePicture() {
+  //   const image = await Camera.getPhoto({
+  //     quality: 90,
+  //     allowEditing: false,
+  //     resultType: CameraResultType.Uri
+  //   });
+  //   var imageUrl = image.webPath;
+  //   // Can be set to the src of an image now
+  //   this.setState({
+  //     photo: imageUrl
+  //   });
+  // }
+
   async takePicture() {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.Uri
-    });
-    var imageUrl = image.webPath;
-    // Can be set to the src of an image now
-    this.setState({
-      photo: imageUrl
-    });
-  }
+    console.log("nikunj0 " );
+      const options = {
+          quality: 100,
+          destinationType: Camera.DestinationType.FILE_URI,
+          encodingType: Camera.EncodingType.JPEG,
+          mediaType: Camera.MediaType.PICTURE
+        }
+        
+        Camera.getPicture(options).then((imageData) => {
+         // imageData is either a base64 encoded string or a file URI
+         // If it's base64 (DATA_URL):
+         
+         let base64Image = 'data:image/jpeg;base64,' + imageData;
+         console.log("nikunj1 ", base64Image );
+         return base64Image;
+        }, (err) => {
+          console.log("nikunj2 ",err );
+        });
+  
+      //takePhoto1();
+    }
 
   render() {
     const { photo } = this.state;

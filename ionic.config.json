@@ -1,7 +1,16 @@
 {
   "name": "IonicReactCamera",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "enterprise": {
+      "keyId": 928,
+      "productKey": "key_3295368966474cd6a0656cd5991f1622",
+      "appId": "f5371c2c",
+      "orgId": "56b2c6d9-3f51-46f4-a2dd-9fa8300ac412",
+      "registries": [
+        "@ionic-enterprise;https://registry.ionicframework.com/"
+      ]
+    }
   },
   "type": "react"
 }
